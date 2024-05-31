@@ -1,0 +1,99 @@
+﻿@model WebApplication1.VMs.VisitorHomePageVm
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoşgeldiniz - Ziyaretçi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #ff9f1a;
+        }
+
+        .about-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #343a40;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hoşgeldiniz</h1>
+            <p>En kaliteli bloglar için doğru adrestesiniz.</p>
+            <div class="about-link">
+                <p>Daha fazla bilgi için <a href="@Url.Action("About", "Home")" class="btn btn-info">Hakkımızda</a> sayfasına göz atabilirsiniz.</p>
+            </div>
+        </div>
+
+        <h2>En Çok Okunan Makaleler</h2>
+        <div class="row">
+            @foreach (var article in Model.MostReadArticles)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@article.Title</h5>
+                            <a href="@Url.Action("Login", "User", new { id = article.ArticleId })" class="btn btn-warning">Devamını Oku</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <h2>Genel Makaleler</h2>
+        <div class="row">
+            @foreach (var article in Model.GeneralArticles)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@article.Title</h5>                           
+                            <a href="@Url.Action("Login", "User", new { id = article.ArticleId })" class="btn btn-warning">Devamını Oku</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Blog Diyarı. Tüm hakları saklıdır.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

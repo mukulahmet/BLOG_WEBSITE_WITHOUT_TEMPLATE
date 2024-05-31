@@ -1,0 +1,104 @@
+﻿ @model List<WebApplication1.Models.Entities.Article>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Listesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .blog-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .blog-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+            .blog-item h2 {
+                margin: 0 0 10px;
+                font-size: 1.5em;
+                color: #ff9f1a;
+            }
+
+            .blog-item p {
+                margin: 0;
+                color: #555;
+            }
+
+            .blog-item a {
+                display: inline-block;
+                margin-top: 10px;
+                text-decoration: none;
+                color: #ff9f1a;
+                font-weight: bold;
+            }
+
+                .blog-item a:hover {
+                    text-decoration: underline;
+                }
+
+        .categories {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Makale Listesi</h1>
+        <ul class="blog-list">
+            @foreach (var blog in Model)
+            {
+                <li class="blog-item">
+                    <h2>@blog.Title</h2>
+                    <p>@blog.Content</p>
+                    <p class="categories">
+                        Kategoriler:
+                        @foreach (var category in blog.ArticleCategories)
+                        {
+                            @category.Category.CategoryName
+                            @if (category != blog.ArticleCategories.Last())
+                            {
+                                <span>,</span>
+                            }
+                        }
+                    </p>
+                    <p class="author">
+                        Yazar: @blog.User?.UserName
+                    </p>
+                    @* <a href="@blog.Url">Devamını oku...</a> *@
+                </li>
+            }
+        </ul>
+    </div>
+
+</body>
+</html>

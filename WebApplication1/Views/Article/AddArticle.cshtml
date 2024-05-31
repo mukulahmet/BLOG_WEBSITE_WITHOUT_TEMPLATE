@@ -1,0 +1,118 @@
+﻿@model WebApplication1.VMs.CreateArticleVm
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Listesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .blog-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .blog-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+            .blog-item h2 {
+                margin: 0 0 10px;
+                font-size: 1.5em;
+                color: #ff9f1a;
+            }
+
+            .blog-item p {
+                margin: 0;
+                color: #555;
+            }
+
+            .blog-item a {
+                display: inline-block;
+                margin-top: 10px;
+                text-decoration: none;
+                color: #ff9f1a;
+                font-weight: bold;
+            }
+
+                .blog-item a:hover {
+                    text-decoration: underline;
+                }
+
+        .blog-form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+            .blog-form input, .blog-form textarea, .blog-form select {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .blog-form button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #ff9f1a;
+                color: white;
+                cursor: pointer;
+            }
+
+                .blog-form button:hover {
+                    background-color: #ff9f1a;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Makale Listesi</h1>
+        <div class="blog-form">
+            <h2>Yeni Makale Ekle</h2>
+            <form asp-controller="Article" asp-action="AddArticle" method="post">
+                <input asp-for="Title" placeholder="Makale Başlığı" required>
+                <textarea asp-for="Content" rows="4" placeholder="Makale Açıklaması" required></textarea>
+                <select asp-for="SelectedCategories" multiple required>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.CategoryId">@category.CategoryName</option>
+                    }
+                </select>
+                <button type="submit">Ekle</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
